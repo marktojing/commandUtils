@@ -3,10 +3,13 @@ package com.csnt.utils.app;
 import android.app.ActivityManager;
 import android.app.Service;
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.os.Build;
 
 import java.util.List;
+
 
 /**
  * Created by sunrain
@@ -16,20 +19,21 @@ public class AppUtil {
     /**
      * 获取应用前后台状态
      */
-    public static boolean isAppRunningForeground(Context context){
+    public static boolean isAppRunningForeground(Context context) {
         ActivityManager activityManager = (ActivityManager) context.getSystemService(Service.ACTIVITY_SERVICE);
         List<ActivityManager.RunningAppProcessInfo> runningAppProcessInfoList = activityManager.getRunningAppProcesses();
-        if (runningAppProcessInfoList==null){
+        if (runningAppProcessInfoList == null) {
             return false;
         }
         for (ActivityManager.RunningAppProcessInfo processInfo : runningAppProcessInfoList) {
             if (processInfo.processName.equals(context.getPackageName())
-                    && processInfo.importance==ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND){
+                    && processInfo.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND) {
                 return true;
             }
         }
         return false;
     }
+
     /**
      * 获得版本名称
      */
@@ -58,4 +62,14 @@ public class AppUtil {
 
         return pi;
     }
+
+    public static boolean isDebugApp(Context context) {
+        try {
+            ApplicationInfo info = context.getApplicationInfo();
+            return (info.flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0;
+        } catch (Exception x) {
+            return false;
+        }
+    }
+
 }
