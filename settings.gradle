@@ -1,0 +1,3 @@
+rootProject.name='commandUtils'
+include ':app'
+include ':utils'
