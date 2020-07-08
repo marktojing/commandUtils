@@ -2,6 +2,8 @@ package com.csnt.utils.log;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.csnt.utils.app.AppUtil;
+
 /**
  * Created by sunrain
  * Created Date 2020/6/18 11:04 AM
@@ -16,6 +18,7 @@ public class LogUtil {
     public static boolean showW = true;
     public static boolean showE = true;
     public static boolean showWTF = true;
+    public static boolean isInput=false;
 
     /**
      * 得到tag（所在类.方法（L:行））
